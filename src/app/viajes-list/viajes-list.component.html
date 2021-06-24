@@ -1,0 +1,13 @@
+<app-viajes-filter [tiposDeViaje]="tiposDeViaje" (buscar)="buscar.emit($event)"></app-viajes-filter>
+<div class="row mb-3">
+   <div class="col-12">
+      <a (click)="cambiarVistaClick()" class="btn btn-warning">Cambiar vista</a>
+   </div>
+</div>
+
+<app-viajes-card-list [viajes]="viajes" *ngIf="!mostrarTarjetas"></app-viajes-card-list>
+
+
+<app-viajes-table-list [viajes]="viajes" (editar)="editar.emit($event)" (eliminar)="eliminar.emit($event)"
+   *ngIf="mostrarTarjetas">
+</app-viajes-table-list>

@@ -1,0 +1,66 @@
+<form [formGroup]="viajesForm" (ngSubmit)="guardarClick(viajesForm)" [ngClass]="{submited: submited}">
+   <div>
+
+   </div>
+   <fieldset>
+      <legend>
+         <h1> Edicion de Viajes</h1>
+      </legend>
+      <div class="flex-row">
+         <div class="field-element">
+            <label for="">Nombre: </label>
+            <input id="" type="text" formControlName="nombre">
+         </div>
+         <div class="field-element">
+            <label for="">Destino: </label>
+            <input id="" type="text" formControlName="destino">
+            <span class="error" *ngIf="viajesForm.controls.destino.hasError('invalidDestiny')">Restricción COVID</span>
+         </div>
+
+         <div class="field-element">
+            <label for="">Tipo de Viaje: </label>
+            <select id="" formControlName="tipoDeViajeId">
+               <option *ngFor="let item of tiposDeViaje" [ngValue]="item.id">{{item.valor}}</option>
+            </select>
+         </div>
+         <div class="field-element">
+            <label for="">Duración: </label>
+            <input id="" type="number" formControlName="duracion">
+         </div>
+         <div class="field-element">
+            <label for="">Precio: </label>
+            <input id="" type="number" formControlName="precio">
+         </div>
+         <div class="field-element">
+            <label for="">Fecha de salida: </label>
+            <input type="date" formControlName="fecha">
+         </div>
+         <div class="field-element">
+            <label for="">Plazas: </label>
+            <input id="" type="number" formControlName="plazas">
+         </div>
+         <div class="field-element">
+            <label for="">Estado: </label>
+            <select id="" formControlName="estado">
+
+            </select>
+         </div>
+         <div class="field-element">
+            <label for="">En oferta: </label>
+            <select id="" formControlName="enOferta">
+               <option value="true">Sí</option>
+               <option value="false">No</option>
+            </select>
+         </div>
+
+      </div>
+   </fieldset>
+   <div class="row-buttons">
+      <!-- desactivar botón hasta que tenga todos los campos correctos
+          <button class="btn primary" type="submit" [disabled]="viajesForm.invalid">Guardar</button> -->
+      <button class="btn primary" type="submit">Guardar</button>
+      <button class="btn " type="button" (click)="resetForm()">Nuevo Viaje</button>
+   </div>
+
+
+</form>
