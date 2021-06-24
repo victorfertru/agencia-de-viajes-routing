@@ -1,36 +1,39 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TipoDeViaje } from '../models/enums/tipo-de-viaje.enum';
 import { Viaje } from '../models/viaje';
 import { IdValor } from '../services/id-valor';
+import { ViajesModelService } from '../services/viajes-model.service';
 
 @Component({
   selector: 'app-viajes-edit',
   templateUrl: './viajes-edit.component.html',
   styleUrls: ['./viajes-edit.component.scss'],
 })
-export class ViajesEditComponent implements OnInit, OnChanges {
-  @Input() viaje: Viaje | null = null;
-  @Input() tiposDeViaje: IdValor[] = [];
-  @Output() guardar = new EventEmitter<Viaje>();
+export class ViajesEditComponent implements OnInit {
+  id: string = '';
+  viaje: Viaje | null = null;
+  tiposDeViaje: IdValor[] = [];
 
   submited = false;
-
   viajesForm: FormGroup;
-  constructor(fb: FormBuilder) {
+
+  constructor(
+    fb: FormBuilder,
+    private viajesModel: ViajesModelService,
+    private router: Router,
+    route: ActivatedRoute
+  ) {
+    route.params.subscribe((params) => {
+      this.id = params.id || '';
+    });
+
     this.viajesForm = fb.group({
       id: [''],
       nombre: ['', Validators.required],
@@ -46,6 +49,21 @@ export class ViajesEditComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    if (this.id) {
+      this.viajesModel.getViajeById(this.id).subscribe((viaje) => {
+        if (viaje) {
+          this.viajesForm.patchValue(viaje);
+          if (viaje?.fechaSalida) {
+            const t = this.formatFecha(viaje?.fechaSalida);
+
+            this.viajesForm.controls.fecha.setValue(t);
+          }
+        }
+      });
+    }
+
+    this.tiposDeViaje = this.viajesModel.getTiposDeViajes();
+
     this.viajesForm.controls.destino.valueChanges.subscribe((x: string) => {
       // if (x?.toLowerCase() === 'málaga') {
       //   this.viajesForm.controls.enOferta.setValue(true);
@@ -65,21 +83,6 @@ export class ViajesEditComponent implements OnInit, OnChanges {
         }
       }
     );
-
-    this.viajesForm.valueChanges.subscribe((x) => {
-      //   console.log(x);
-    });
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.viaje) {
-      this.viajesForm.patchValue(changes.viaje.currentValue);
-      if (changes.viaje.currentValue?.fechaSalida) {
-        const t = this.formatFecha(changes.viaje.currentValue.fechaSalida);
-
-        this.viajesForm.controls.fecha.setValue(t);
-      }
-    }
   }
 
   guardarClick(form: FormGroup): void {
@@ -89,11 +92,16 @@ export class ViajesEditComponent implements OnInit, OnChanges {
       if (form.value.fecha) {
         viaje.fechaSalida = new Date(form.value.fecha);
       }
+      this.viajesModel.guardar(viaje).subscribe(() => {
+        this.router.navigate(['']);
+      });
 
-      this.guardar.emit(new Viaje(viaje));
-
-      this.resetForm();
+      // this.resetForm();
     }
+  }
+
+  volverAViajes(): void {
+    this.router.navigate(['']);
   }
 
   resetForm() {
