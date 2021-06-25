@@ -23,7 +23,7 @@ export class ViajesModelService {
     { id: 8, valor: 'Gastronómico' },
   ];
 
-  private url = 'http://localhost:3000';
+  private url = 'http://localhost:3000/viajes';
 
   constructor(private http: HttpClient) {}
 
@@ -31,7 +31,7 @@ export class ViajesModelService {
     // aquí dejamos la petición.
     // Nos suscribimos DÓNDE utilicemos el getViajes para que cuadren los tipos que devolvemos
     return this.http
-      .get<Viaje[]>(`${this.url}/viajes`)
+      .get<Viaje[]>(`${this.url}`)
       .pipe(map((x) => x.map((v) => new Viaje(v))));
     //para que la primera vez funcione, hay que importar algún operador import { map } from 'rxjs/operators';
     // Un pipe es un "transformador". Es una tubería que aplica un cambio sobre lo que viaja por ella
@@ -48,7 +48,7 @@ export class ViajesModelService {
   getViajeById(id: string): Observable<Viaje> {
     //return this.viajes.find((x) => x.id === id);
     return this.http
-      .get<Viaje>(`${this.url}/viajes/${id}`)
+      .get<Viaje>(`${this.url}/${id}`)
       .pipe(map((x) => new Viaje(x)));
   }
 
@@ -67,12 +67,12 @@ export class ViajesModelService {
       httpP = httpP.set('destino', destino);
     }
     return this.http
-      .get<Viaje[] | []>(`${this.url}/viajes/search`, { params: httpP })
+      .get<Viaje[] | []>(`${this.url}/search`, { params: httpP })
       .pipe(map((x) => x.map((v: Viaje) => new Viaje(v))));
 
     //  const params = `tipoDeViajeId=${tipoDeViajeId}&nombre=${nombre}&destino=${destino}`;
     // return this.http
-    //   .get<Viaje[] | []>(`${this.url}/viajes/search?${params}`)
+    //   .get<Viaje[] | []>(`${this.url}/search?${params}`)
     //   .pipe(map((x) => x.map((v: Viaje) => new Viaje(v))));
   }
 
@@ -83,7 +83,7 @@ export class ViajesModelService {
 
     if (viaje.id) {
       return this.http
-        .put<Viaje>(`${this.url}/viajes/${viaje.id}`, viaje)
+        .put<Viaje>(`${this.url}/${viaje.id}`, viaje)
         .pipe(map((x) => new Viaje(x)));
 
       // const idx = this.viajes.findIndex((x) => x.id === viaje.id);
@@ -96,7 +96,7 @@ export class ViajesModelService {
 
     //crear nuevo viaje
     return this.http
-      .post<Viaje>(`${this.url}/viajes`, viaje)
+      .post<Viaje>(`${this.url}`, viaje)
       .pipe(map((x) => new Viaje(x)));
     // this.viajes.push({ ...viaje, id: `viaje_${this.id++}` });
     // return this.viajes[this.viajes.length - 1];
@@ -105,19 +105,21 @@ export class ViajesModelService {
   eliminar(id: string): Observable<boolean | null> {
     if (id) {
       // return this.http
-      //   .delete<ViajeDelete>(`${this.url}/viajes/${id}`)
+      //   .delete<ViajeDelete>(`${this.url}/${id}`)
       //   .pipe(map((x) => x.deleted));
       return this.http
-        .delete<boolean>(`${this.url}/viajes/${id}`, { observe: 'response' })
+        .delete<boolean>(`${this.url}/${id}`, { observe: 'response' })
         .pipe(map((x) => x.status === HttpStatusCode.NoContent));
     }
     return of(null);
   }
 
+  // TODO traer de BBDD
   getTiposDeViajes(): IdValor[] {
     return this.tiposDeViaje;
   }
 
+  // TODO traer de BBDD
   getTipoViajeById(tipoId: string): IdValor | null {
     if (tipoId) {
       const idx = this.tiposDeViaje.findIndex((x) => x.id === tipoId);

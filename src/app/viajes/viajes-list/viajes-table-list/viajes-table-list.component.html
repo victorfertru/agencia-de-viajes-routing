@@ -6,9 +6,9 @@
             <tr>
                <th>#</th>
                <th class="left">Nombre</th>
+               <th>Destino</th>
                <th>Tipo de Viaje</th>
                <th>Duración</th>
-               <th>Destino</th>
                <th>Plazas</th>
                <th>Precio</th>
                <th>Estado</th>
@@ -27,13 +27,13 @@
                   {{v.nombre}}
                </td>
                <td>
+                  {{v.destino}}
+               </td>
+               <td>
                   {{v.tipoDeViajeId | tipoDeViaje}}
                </td>
                <td>
                   {{v.duracion}}
-               </td>
-               <td>
-                  {{v.destino}}
                </td>
                <td>
                   {{v.plazas}}

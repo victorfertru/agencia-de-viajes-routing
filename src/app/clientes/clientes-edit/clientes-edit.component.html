@@ -1,0 +1,57 @@
+<form [formGroup]="clientesForm" (ngSubmit)="guardarClick(clientesForm)" [ngClass]="{submited: submited}">
+   <div>
+      <a [routerLink]="['/clientes']" class="btn btn-warning">Volver a Clientes</a>
+   </div>
+   <fieldset>
+      <legend>
+         <h1> Clientes</h1>
+      </legend>
+      <div class="flex-row">
+         <div class="field-element">
+            <label for="">Nombre: </label>
+            <input type="text" formControlName="nombre">
+         </div>
+         <div class="field-element">
+            <label for="">Apellidos: </label>
+            <input type="text" formControlName="apellidos">
+         </div>
+
+         <div class="field-element">
+            <label for="">DNI: </label>
+            <input type="text" formControlName="dni">
+         </div>
+         <div class="field-element">
+            <label for="">Dirección: </label>
+            <input type="text" formControlName="direccion">
+         </div>
+         <div class="field-element">
+            <label for="">Teléfono: </label>
+            <input type="tel" formControlName="telefono">
+         </div>
+         <div class="field-element">
+            <label for="">E-Mail: </label>
+            <input type="email" formControlName="email">
+         </div>
+         <div class="field-element">
+            <label for="">Estado civil: </label>
+            <select formControlName="estadoCivilId">
+               <option></option>
+               <!-- <option *ngFor="let item of tiposDeViaje" [ngValue]="item.id">{{item.valor}}</option> -->
+            </select>
+         </div>
+         <div class="field-element">
+            <label for="">Fecha de Nacimiento: </label>
+            <input type="date" formControlName="fechaNacimiento">
+         </div>
+
+      </div>
+   </fieldset>
+   <div class="row-buttons">
+      <!-- desactivar botón hasta que tenga todos los campos correctos
+          <button class="btn primary" type="submit" [disabled]="viajesForm.invalid">Guardar</button> -->
+      <button class="btn primary" type="submit">Guardar</button>
+      <button class="btn " type="button" (click)="resetForm()">Nuevo Viaje</button>
+   </div>
+
+
+</form>

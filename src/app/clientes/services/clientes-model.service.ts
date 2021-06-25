@@ -20,7 +20,7 @@ export class ClientesModelService {
         // TODO preguntar a jose qué poner en lugar de any para que funcione bien
         x.map((c: any) => {
           const cliente = new ClienteListItem(c);
-          cliente.estadoCivilDesc = c.estadoCivil.estadoCivilDesc;
+          cliente.estadoCivilDesc = c.estadoCivil?.estadoCivilDesc ?? '';
           return cliente;
         })
       )
@@ -31,9 +31,11 @@ export class ClientesModelService {
     if (!id) {
       return of(null);
     }
-    return this.http
-      .get<Cliente>(`${this.url}/${id}`)
-      .pipe(map((cliente) => new Cliente(cliente)));
+    return this.http.get<Cliente>(`${this.url}/${id}`).pipe(
+      map((cliente) => {
+        return new Cliente(cliente);
+      })
+    );
   }
 
   save(cliente: Cliente): Observable<Cliente | null> {
@@ -42,13 +44,20 @@ export class ClientesModelService {
     }
 
     return cliente?.id
-      ? this.http
-          .put<Cliente>(`${this.url}/${cliente.id}`, cliente)
-          .pipe(map((cliente) => new Cliente(cliente)))
-      : this.http
-          .post<Cliente>(`${this.url}`, cliente)
-          .pipe(map((cliente) => new Cliente(cliente)));
+      ? this.http.put<Cliente>(`${this.url}/${cliente.id}`, cliente).pipe(
+          map((cliente) => {
+            console.log(cliente);
+            return new Cliente(cliente);
+          })
+        )
+      : this.http.post<Cliente>(`${this.url}`, cliente).pipe(
+          map((cliente) => {
+            console.log(cliente);
+            return new Cliente(cliente);
+          })
+        );
   }
+
   delete(id: string): Observable<boolean> {
     return id
       ? this.http
