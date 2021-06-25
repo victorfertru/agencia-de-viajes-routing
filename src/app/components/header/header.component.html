@@ -1,10 +1,11 @@
 <nav class="navbar navbar-expand-lg  navbar-dark bg-dark mb-3">
-   <div class="container-fluid justify-content-start">
-      <a class="navbar-brand" [routerLink]="['']">ViajeSeidón</a>
+   <div class="container justify-content-start">
+      <a class="navbar-brand" [routerLink]="['']" title="Ir a Inicio">ViajeSeidón</a>
 
       <div class="navbar-nav">
-         <a class="nav-link active" [routerLink]="['viajes']">Viajes</a>
-         <a class="nav-link" [routerLink]="['viajes/editar']">Crear viaje</a>
+         <a class="nav-link" [routerLink]="['viajes']" title="Listado de Viajes">Listado de Viajes</a>
+         <a class="nav-link" [routerLink]="['viajes/editar']" title="Crear viaje">Crear viaje</a>
+         <a class="nav-link" [routerLink]="['clientes']" title="Clientes">Clientes</a>
       </div>
    </div>
 </nav>

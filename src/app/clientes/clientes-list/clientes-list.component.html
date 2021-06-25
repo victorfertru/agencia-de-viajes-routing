@@ -1,0 +1,43 @@
+<div class="row">
+   <div>
+      <a [routerLink]="['']" class="btn btn-warning">Volver a Inicio</a>
+   </div>
+   <div class="col-12">
+      <table class="table  table-striped table-hover ">
+         <thead>
+            <tr>
+               <th>#</th>
+               <th class="left">Nombre</th>
+               <th>DNI</th>
+               <th>Teléfono</th>
+               <th>Estado civil</th>
+               <th>Editar</th>
+               <th>Borrar</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr *ngFor="let c of clientes; let idx = index">
+               <th>
+                  {{idx+1}}
+               </th>
+               <td class="left">
+                  {{c.nombre}}
+               </td>
+               <td>
+                  {{c.dni}}
+               </td>
+               <td>
+                  {{c.telefono}}
+               </td>
+               <td>
+                  {{c.estadoCivilDesc}}
+               </td>
+               <td><i class="far fa-edit" title="Editar cliente" (click)="editarClick(c.id)"></i>
+               </td>
+               <td><i class="far fa-trash-alt" title="Eliminar Cliente" (click)="borrarClick(c.id)"></i>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+</div>

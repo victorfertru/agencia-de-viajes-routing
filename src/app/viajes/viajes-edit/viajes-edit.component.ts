@@ -93,15 +93,11 @@ export class ViajesEditComponent implements OnInit {
         viaje.fechaSalida = new Date(form.value.fecha);
       }
       this.viajesModel.guardar(viaje).subscribe(() => {
-        this.router.navigate(['']);
+        this.router.navigate(['viajes']);
       });
 
       // this.resetForm();
     }
-  }
-
-  volverAViajes(): void {
-    this.router.navigate(['']);
   }
 
   resetForm() {

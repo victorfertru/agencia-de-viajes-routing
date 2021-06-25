@@ -1,6 +1,6 @@
 <form [formGroup]="viajesForm" (ngSubmit)="guardarClick(viajesForm)" [ngClass]="{submited: submited}">
    <div>
-      <a (click)="volverAViajes()" class="btn btn-warning">Volver a Viajes</a>
+      <a [routerLink]="['..']" class="btn btn-warning">Volver a Viajes</a>
    </div>
    <fieldset>
       <legend>
@@ -14,7 +14,8 @@
          <div class="field-element">
             <label for="">Destino: </label>
             <input id="" type="text" formControlName="destino">
-            <span class="error" *ngIf="viajesForm.controls.destino.hasError('invalidDestiny')">Restricción COVID</span>
+            <span class="error" *ngIf="viajesForm.controls.destino.hasError('invalidDestiny')">Restricción
+               COVID</span>
          </div>
 
          <div class="field-element">

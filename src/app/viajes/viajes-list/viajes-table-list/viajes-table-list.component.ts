@@ -1,6 +1,6 @@
 import { EventEmitter } from '@angular/core';
 import { Component, Input, OnInit, Output } from '@angular/core';
-import { Viaje } from 'src/app/models/viaje';
+import { Viaje } from '../../models/viaje';
 
 @Component({
   selector: 'app-viajes-table-list',
