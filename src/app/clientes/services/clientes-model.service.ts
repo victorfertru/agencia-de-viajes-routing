@@ -46,13 +46,11 @@ export class ClientesModelService {
     return cliente?.id
       ? this.http.put<Cliente>(`${this.url}/${cliente.id}`, cliente).pipe(
           map((cliente) => {
-            console.log(cliente);
             return new Cliente(cliente);
           })
         )
       : this.http.post<Cliente>(`${this.url}`, cliente).pipe(
           map((cliente) => {
-            console.log(cliente);
             return new Cliente(cliente);
           })
         );

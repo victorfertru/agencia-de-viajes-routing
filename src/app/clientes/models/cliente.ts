@@ -7,7 +7,7 @@ export class Cliente {
   email: string;
   direccion: string;
   dni: string;
-  telefono: string;
+  telefono: string | null;
   fechaNacimiento: Date | null;
   estadoCivilId: EstadoCivil | null;
 
@@ -17,9 +17,9 @@ export class Cliente {
     this.nombre = item?.nombre ?? '';
     this.apellidos = item?.apellidos ?? '';
     this.email = item?.email ?? '';
-    this.telefono = item?.telefono ?? '';
+    this.telefono = item?.telefono ?? null;
     this.direccion = item?.direccion ?? '';
-    this.estadoCivilId = item?.estadoCivilId ?? null;
+    this.estadoCivilId = item?.estadoCivilId ? item?.estadoCivilId : null;
     this.fechaNacimiento = item?.fechaNacimiento
       ? new Date(item.fechaNacimiento)
       : null;
