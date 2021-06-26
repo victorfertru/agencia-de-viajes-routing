@@ -35,10 +35,7 @@ export class ClientesEditComponent implements OnInit {
       nombre: ['', [Validators.required, Validators.min(3)]],
       apellidos: ['', [Validators.required, Validators.min(5)]],
       email: ['', [Validators.required, Validators.email]],
-      direccion: [
-        '',
-        [Validators.required, Validators.min(10), Validators.max(70)],
-      ],
+      direccion: ['', Validators.required],
       dni: ['', Validators.required],
       //dni: ['', [Validators.required, Validators.min(5), Validators.max(10)]],
       telefono: [null],
