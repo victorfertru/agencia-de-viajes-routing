@@ -51,7 +51,15 @@ export class ViajesModelService {
     }
     return this.http
       .get<Viaje[] | []>(`${this.url}/search`, { params: httpP })
-      .pipe(map((x) => x.map((v: Viaje) => new Viaje(v))));
+      .pipe(
+        map((x) =>
+          x.map((v: any) => {
+            const viaje = new Viaje(v);
+            viaje.tipoDeViajeDesc = v.tipoDeViaje?.tipoDeViajeDesc ?? '';
+            return viaje;
+          })
+        )
+      );
 
     //  const params = `tipoDeViajeId=${tipoDeViajeId}&nombre=${nombre}&destino=${destino}`;
     // return this.http
