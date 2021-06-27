@@ -7,8 +7,9 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TipoDeViaje } from '../models/enums/tipo-de-viaje.enum';
+import { TiposDeViajes } from '../models/tiposDeViajes';
 import { Viaje } from '../models/viaje';
-import { IdValor } from '../services/id-valor';
+import { TiposDeViajesModelService } from '../services/tipos-de-viajes-model.service';
 import { ViajesModelService } from '../services/viajes-model.service';
 
 @Component({
@@ -19,7 +20,7 @@ import { ViajesModelService } from '../services/viajes-model.service';
 export class ViajesEditComponent implements OnInit {
   id: string = '';
   viaje: Viaje | null = null;
-  tiposDeViaje: IdValor[] = [];
+  tiposDeViaje: TiposDeViajes[] = [];
 
   submited = false;
   viajesForm: FormGroup;
@@ -28,6 +29,7 @@ export class ViajesEditComponent implements OnInit {
     fb: FormBuilder,
     private viajesModel: ViajesModelService,
     private router: Router,
+    private tiposModel: TiposDeViajesModelService,
     route: ActivatedRoute
   ) {
     route.params.subscribe((params) => {
@@ -62,7 +64,10 @@ export class ViajesEditComponent implements OnInit {
       });
     }
 
-    this.tiposDeViaje = this.viajesModel.getTiposDeViajes();
+    //this.tiposDeViaje = this.viajesModel.getTiposDeViajes();
+    this.tiposModel.getAll().subscribe((data) => {
+      this.tiposDeViaje = data;
+    });
 
     this.viajesForm.controls.destino.valueChanges.subscribe((x: string) => {
       // if (x?.toLowerCase() === 'málaga') {

@@ -7,12 +7,10 @@ import { ViajesCardListComponent } from './viajes-list/viajes-card-list/viajes-c
 import { ViajesFilterComponent } from './viajes-list/viajes-filter/viajes-filter.component';
 import { ViajesListComponent } from './viajes-list/viajes-list.component';
 import { ViajesTableListComponent } from './viajes-list/viajes-table-list/viajes-table-list.component';
-import { TipoDeViajePipe } from './tipo-de-viaje.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    TipoDeViajePipe,
     ViajesListComponent,
     ViajesCardListComponent,
     ViajesTableListComponent,

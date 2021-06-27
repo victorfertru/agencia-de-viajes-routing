@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TipoDeViaje } from '../models/enums/tipo-de-viaje.enum';
 import { Viaje } from '../models/viaje';
 import { ViajesFilter } from '../models/viajesFilter';
-import { IdValor } from '../services/id-valor';
 import { ViajesModelService } from '../services/viajes-model.service';
+import { TiposDeViajesModelService } from '../services/tipos-de-viajes-model.service';
+import { TiposDeViajes } from '../models/tiposDeViajes';
 
 @Component({
   selector: 'app-viajes-list',
@@ -13,18 +13,21 @@ import { ViajesModelService } from '../services/viajes-model.service';
 })
 export class ViajesListComponent implements OnInit {
   viajes: Viaje[] = [];
-  tiposDeViaje: IdValor[] = [];
+  tiposDeViaje: TiposDeViajes[] = [];
 
   mostrarTarjetas = true;
 
   constructor(
     private viajesModel: ViajesModelService,
+    private tiposModel: TiposDeViajesModelService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
     this.cargarViajes();
-    this.tiposDeViaje = this.viajesModel.getTiposDeViajes();
+    this.tiposModel.getAll().subscribe((data) => {
+      this.tiposDeViaje = data;
+    });
   }
 
   cambiarVistaClick() {

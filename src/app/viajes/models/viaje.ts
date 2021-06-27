@@ -1,22 +1,8 @@
-import { TipoDeViaje } from './enums/tipo-de-viaje.enum';
-
-// export interface Viaje {
-//   id: string;
-//   nombre: string;
-//   tipoDeViajeId: TipoDeViaje;
-//   duracion: number;
-//   destino: string;
-//   precio: number;
-//   plazas: number;
-//   enOferta: boolean;
-//   estado: number;
-//   fechaSalida: Date;
-// }
-
 export class Viaje {
   id: string;
   nombre: string;
-  tipoDeViajeId: TipoDeViaje;
+  tipoDeViajeId: number;
+  tipoDeViajeDesc: string;
   duracion: number;
   destino: string;
   precio: number | null;
@@ -28,7 +14,8 @@ export class Viaje {
   constructor(item?: any) {
     this.id = item?.id ?? '';
     this.nombre = item?.nombre ?? '';
-    this.tipoDeViajeId = (item?.tipoDeViajeId || item?.TipoDeViajeId) ?? null;
+    this.tipoDeViajeId = item?.tipoDeViajeId ?? null;
+    this.tipoDeViajeDesc = item?.tipoDeViaje ?? '';
     this.duracion = item?.duracion ?? 0;
     this.destino = item?.destino ?? '';
     this.plazas = item?.plazas ?? 0;
@@ -36,13 +23,5 @@ export class Viaje {
     this.enOferta = item?.enOferta ?? false;
     this.estado = item?.estado ?? null;
     this.fechaSalida = item?.fechaSalida ? new Date(item.fechaSalida) : null;
-
-    //  item?.nombre ?? ""; es igual a esto gracias a nullish coalescesing
-    // if (item !== null && item !== undefined && item.nombre !== null && item.nombre !== undefined) {
-    //   this.nombre = item.nombre;
-    // }
-    // else {
-    //   this.nombre = "";
-    // }
   }
 }
