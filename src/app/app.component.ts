@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { AuthService } from './services/auth.service';
 
 @Component({
@@ -9,12 +10,23 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent {
   title = 'agencia-de-viajes-routing';
-  constructor(private authService: AuthService, private router: Router) {}
+  elUsuarioEstaEnLogin = false;
+
+  constructor(private authService: AuthService, private router: Router) {
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationStart))
+      .subscribe((ev: any) => {
+        this.elUsuarioEstaEnLogin = ev?.url.toLowerCase().includes('login');
+      });
+  }
 
   logout(): void {
     if (confirm('¿Seguro que desea cerrar la sesión?')) {
       this.authService.logOut();
       this.router.navigate(['login']);
     }
+  }
+  isLogged(): boolean {
+    return this.authService.isUserAuthenticated;
   }
 }

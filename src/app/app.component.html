@@ -1,4 +1,4 @@
-<app-header (logout)="logout()"></app-header>
+<app-header (logout)="logout()" *ngIf="isLogged()"></app-header>
 <div class="container">
    <router-outlet></router-outlet>
 </div>

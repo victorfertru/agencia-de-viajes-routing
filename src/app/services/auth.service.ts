@@ -6,6 +6,7 @@ import { Usuario } from '../models/usuario';
 })
 export class AuthService {
   private readonly APP_USER = 'APP_USER';
+
   constructor() {}
 
   storeUser(usuario: Usuario) {

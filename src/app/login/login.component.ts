@@ -26,7 +26,11 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.authService.isUserAuthenticated) {
+      this.router.navigate(['']);
+    }
+  }
 
   // login(form: FormGroup): void {
   //   this.submited = true;
