@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { formatFecha } from 'src/app/utils/dates-helpers';
 import { TipoDeViaje } from '../models/enums/tipo-de-viaje.enum';
 import { TiposDeViajes } from '../models/tiposDeViajes';
 import { Viaje } from '../models/viaje';
@@ -56,7 +57,7 @@ export class ViajesEditComponent implements OnInit {
         if (viaje) {
           this.viajesForm.patchValue(viaje);
           if (viaje?.fechaSalida) {
-            const t = this.formatFecha(viaje?.fechaSalida);
+            const t = formatFecha(viaje?.fechaSalida);
 
             this.viajesForm.controls.fecha.setValue(t);
           }
@@ -115,19 +116,5 @@ export class ViajesEditComponent implements OnInit {
       return { invalidDestiny: true };
     }
     return null;
-  }
-
-  private formatFecha(date: Date): string {
-    const y = date.getFullYear();
-    let m: string | number = date.getMonth() + 1;
-    let d: string | number = date.getDate();
-    if (m < 10) {
-      m = `0${m}`;
-    }
-    if (d < 10) {
-      d = `0${d}`;
-    }
-
-    return `${y}-${m}-${d}`;
   }
 }

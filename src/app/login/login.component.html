@@ -1,1 +1,54 @@
-<p>login works!</p>
+<!-- <form [formGroup]="loginForm" (ngSubmit)="login(loginForm)" [ngClass]="{submited: submited}">
+   <div>
+   </div>
+   <fieldset>
+      <legend>
+         <h1> Log in</h1>
+      </legend>
+      <div class="flex-row">
+         <div class="field-element">
+            <label for="">Email: </label>
+            <input type="text" formControlName="email">
+         </div>
+      </div>
+      <div class="flex-row">
+
+         <div class="field-element">
+            <label for="">Password: </label>
+            <input type="password" formControlName="password">
+         </div>
+      </div>
+      <div class="row-buttons">
+         <button class="btn primary" type="submit">Log In</button>
+      </div>
+   </fieldset>
+</form> -->
+
+<form #f=ngForm (ngSubmit)="login(f.value)" [ngClass]="{submited: submited}">
+   <div>
+   </div>
+   <fieldset>
+      <legend>
+         <h1> Log in</h1>
+      </legend>
+      <div class="flex-row">
+         <div class="field-element">
+            <label for="">Email: </label>
+            <input type="email" name="email" required id="email" [(ngModel)]="email">
+         </div>
+      </div>
+      <div class="flex-row">
+
+         <div class="field-element">
+            <label for="">Password: </label>
+            <input type="password" name="password" minlength="4" required id="password" ngModel>
+         </div>
+      </div>
+      <p *ngIf="error">
+         Usuario / contraseña incorrecta
+      </p>
+      <div class="row-buttons">
+         <button class="btn primary" type="submit" [disabled]=f.invalid>Log In</button>
+      </div>
+   </fieldset>
+</form>

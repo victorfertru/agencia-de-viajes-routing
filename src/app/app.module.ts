@@ -11,10 +11,17 @@ import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { registerLocaleData } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 registerLocaleData(es);
 @NgModule({
   declarations: [AppComponent, HeaderComponent, LoginComponent, HomeComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+  ],
   providers: [
     { provide: LOCALE_ID, useValue: `es` },
     {

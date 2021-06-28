@@ -8,5 +8,14 @@
          <a class="nav-link" [routerLink]="['clientes']" title="Clientes">Clientes</a>
          <a class="nav-link" [routerLink]="['clientes/editar']" title="Crear cliente">Crear cliente</a>
       </div>
+
+      <div class="logout">
+         <i class="fas fa-sign-out-alt" (click)="logout.emit()" title="Cerrar sesión"></i>
+
+      </div>
    </div>
+
+
+
+
 </nav>

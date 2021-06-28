@@ -22,9 +22,8 @@ export class ClientesListComponent implements OnInit {
   }
   editarClick(id: string): void {
     if (id) {
-      this.clientesModel.getById(id).subscribe((viaje) => {
-        if (viaje) {
-          //this.viajeEdicion = viaje;
+      this.clientesModel.getById(id).subscribe((cliente) => {
+        if (cliente) {
           this.router.navigate(['clientes/editar', id]);
         }
       });

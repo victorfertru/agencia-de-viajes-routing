@@ -12,12 +12,15 @@ export class EstadosCivilesModelService {
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<EstadoCivil[]> {
-    return this.http.get<EstadoCivil[]>(`${this.url}`).pipe(
-      map((estados) =>
-        estados.map((e: EstadoCivil) => {
-          return new EstadoCivil(e);
-        })
-      )
-    );
+    return this.http.get<EstadoCivil[]>(`${this.url}`);
   }
+  // getAll(): Observable<EstadoCivil[]> {
+  //   return this.http.get<EstadoCivil[]>(`${this.url}`).pipe(
+  //     map((estados) =>
+  //       estados.map((e: EstadoCivil) => {
+  //         return new EstadoCivil(e);
+  //       })
+  //     )
+  //   );
+  // }
 }
