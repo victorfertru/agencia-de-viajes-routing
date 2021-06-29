@@ -50,7 +50,9 @@ export class ViajesModelService {
       httpP = httpP.set('destino', destino);
     }
     return this.http
-      .get<Viaje[] | []>(`${this.url}/search`, { params: httpP })
+      .get<Viaje[] | []>(`${this.url}/search`, {
+        params: httpP,
+      })
       .pipe(
         map((x) =>
           x.map((v: any) => {
@@ -90,7 +92,9 @@ export class ViajesModelService {
       //   .delete<ViajeDelete>(`${this.url}/${id}`)
       //   .pipe(map((x) => x.deleted));
       return this.http
-        .delete<boolean>(`${this.url}/${id}`, { observe: 'response' })
+        .delete<boolean>(`${this.url}/${id}`, {
+          observe: 'response',
+        })
         .pipe(map((x) => x.status === HttpStatusCode.NoContent));
     }
     return of(null);

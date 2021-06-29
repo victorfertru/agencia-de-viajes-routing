@@ -9,6 +9,7 @@ import { TiposDeViajes } from '../models/tiposDeViajes';
 })
 export class TiposDeViajesModelService {
   private url = 'http://localhost:3000/viajes/tiposDeViaje';
+
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<TiposDeViajes[]> {

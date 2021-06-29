@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { EstadoCivil } from '../models/estadoCivil';
 
 @Injectable({
@@ -9,6 +8,7 @@ import { EstadoCivil } from '../models/estadoCivil';
 })
 export class EstadosCivilesModelService {
   private url = 'http://localhost:3000/clientes/estadosCiviles';
+
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<EstadoCivil[]> {

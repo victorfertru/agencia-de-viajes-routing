@@ -13,6 +13,16 @@ export class AuthService {
     localStorage.setItem(this.APP_USER, JSON.stringify(usuario));
   }
 
+  get bearer(): string {
+    const b = localStorage.getItem(this.APP_USER);
+    if (b) {
+      const user: Usuario = JSON.parse(b);
+      return user.bearer;
+    }
+
+    return '';
+  }
+
   get isUserAuthenticated(): boolean {
     return localStorage.getItem(this.APP_USER) !== null;
   }
